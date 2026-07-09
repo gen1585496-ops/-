@@ -23,7 +23,7 @@
       "added_date": "2026-07-04",
       "review_schedule": [
         {"review_number": 1, "due_date": "2026-07-05", "completed": true},
-        {"review_number": 2, "due_date": "2026-07-08", "completed": false},
+        {"review_number": 2, "due_date": "2026-07-08", "completed": true},
         {"review_number": 3, "due_date": "2026-07-15", "completed": false},
         {"review_number": 4, "due_date": "2026-07-29", "completed": false},
         {"review_number": 5, "due_date": "2026-08-28", "completed": false}
