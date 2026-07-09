@@ -1,0 +1,8 @@
+{
+  "meta": {
+    "description": "動画・ラジオ・記事など多様な学習コンテンツの記録（自動取り込み対象）",
+    "material_types": ["video", "radio", "article", "exercise", "conversation_practice"],
+    "last_synced": "2026-07-09"
+  },
+  "materials": []
+}

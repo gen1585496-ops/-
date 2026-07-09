@@ -45,3 +45,52 @@
 2. `git add knowledge_base.json && git commit -m "Add knowledge: <トピック名>"` を実行
 3. `git push -u origin claude/mejiro-summer-plumage-2o2xdf` でプッシュ
 4. ユーザーに「〇〇をナレッジベースに保存しました」と1行で伝える（長い説明不要）
+
+---
+
+## マルチコンテンツ自動統合ルール
+
+### 対象ファイル
+`/home/user/-/learning_materials.json` に追加された新しい学習コンテンツを自動で `knowledge_base.json` に統合する。
+
+### 統合ルール
+1. `learning_materials.json` の `materials` 配列をチェック
+2. `id` が `knowledge_base.json` の `topics` に存在しないエントリを抽出
+3. 以下の変換を行って `topics` に追加：
+   - `title` → `title`
+   - `quiz_questions` → そのまま使用
+   - `date_completed` → `added_date`（YYYY-MM-DD形式）
+   - `type` をid接頭辞に含める（例：`video-`, `radio-`, `exercise-`）
+   - `user_note` → `summary` の冒頭に付加
+   - 新しい `review_schedule` を生成（忘却曲線: 1, 3, 7, 14, 30日後）
+
+### 処理後の動作
+1. 統合後、`knowledge_base.json` をコミット
+2. `learning_materials.json` の該当エントリに `"integrated": true` を追加してコミット
+3. ユーザーに「〇〇を学習リストに追加しました」と伝える
+
+### 例
+
+入力（`learning_materials.json`）:
+```json
+{
+  "id": "video-english-001",
+  "type": "video",
+  "title": "英会話レッスン第5回",
+  "date_completed": "2026-07-09",
+  "user_note": "発音が難しかった",
+  "quiz_questions": [...]
+}
+```
+
+出力（`knowledge_base.json` の `topics` に追加）:
+```json
+{
+  "id": "video-english-001",
+  "title": "英会話レッスン第5回",
+  "summary": "発音が難しかった | 英会話レッスン第5回",
+  "quiz_questions": [...],
+  "added_date": "2026-07-09",
+  "review_schedule": [...]
+}
+```
