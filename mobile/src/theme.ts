@@ -1,0 +1,15 @@
+export const colors = {
+  paper: '#f2efe6',
+  paperRaised: '#ffffff',
+  paperLine: '#e8e4d6',
+  ink: '#2b2a26',
+  inkSoft: '#6e6a57',
+  inkFaint: '#99947f',
+  line: '#dedacb',
+  teal: '#2f6f63',
+  tealBg: '#e4efeb',
+  coral: '#c85332',
+  coralBg: '#f7e6dd',
+  mustard: '#a9761a',
+  mustardBg: '#f3e7cd',
+};
