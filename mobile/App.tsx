@@ -3,15 +3,17 @@ import { Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'reac
 import HomeScreen from './src/screens/HomeScreen';
 import CalendarScreen from './src/screens/CalendarScreen';
 import CollectionScreen from './src/screens/CollectionScreen';
+import AnalysisScreen from './src/screens/AnalysisScreen';
 import SettingsScreen from './src/screens/SettingsScreen';
 import { colors } from './src/theme';
 
-type Tab = 'home' | 'calendar' | 'collection' | 'settings';
+type Tab = 'home' | 'calendar' | 'collection' | 'analysis' | 'settings';
 
 const TABS: { key: Tab; label: string }[] = [
   { key: 'home', label: '今日の記録' },
   { key: 'calendar', label: 'カレンダー' },
   { key: 'collection', label: '図鑑' },
+  { key: 'analysis', label: '分析' },
   { key: 'settings', label: '設定' },
 ];
 
@@ -28,6 +30,7 @@ export default function App() {
         {tab === 'home' && <HomeScreen />}
         {tab === 'calendar' && <CalendarScreen />}
         {tab === 'collection' && <CollectionScreen />}
+        {tab === 'analysis' && <AnalysisScreen />}
         {tab === 'settings' && <SettingsScreen />}
       </View>
       <View style={styles.tabBar}>
