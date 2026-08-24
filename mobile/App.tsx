@@ -2,9 +2,18 @@ import React, { useState } from 'react';
 import { Pressable, SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 import CalendarScreen from './src/screens/CalendarScreen';
+import CollectionScreen from './src/screens/CollectionScreen';
+import SettingsScreen from './src/screens/SettingsScreen';
 import { colors } from './src/theme';
 
-type Tab = 'home' | 'calendar';
+type Tab = 'home' | 'calendar' | 'collection' | 'settings';
+
+const TABS: { key: Tab; label: string }[] = [
+  { key: 'home', label: '今日の記録' },
+  { key: 'calendar', label: 'カレンダー' },
+  { key: 'collection', label: '図鑑' },
+  { key: 'settings', label: '設定' },
+];
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('home');
@@ -15,10 +24,16 @@ export default function App() {
       <View style={styles.header}>
         <Text style={styles.headerTitle}>ヒビシール</Text>
       </View>
-      <View style={styles.body}>{tab === 'home' ? <HomeScreen /> : <CalendarScreen />}</View>
+      <View style={styles.body}>
+        {tab === 'home' && <HomeScreen />}
+        {tab === 'calendar' && <CalendarScreen />}
+        {tab === 'collection' && <CollectionScreen />}
+        {tab === 'settings' && <SettingsScreen />}
+      </View>
       <View style={styles.tabBar}>
-        <TabButton label="今日の記録" active={tab === 'home'} onPress={() => setTab('home')} />
-        <TabButton label="カレンダー" active={tab === 'calendar'} onPress={() => setTab('calendar')} />
+        {TABS.map((t) => (
+          <TabButton key={t.key} label={t.label} active={tab === t.key} onPress={() => setTab(t.key)} />
+        ))}
       </View>
     </SafeAreaView>
   );
@@ -59,7 +74,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.paperRaised,
   },
   tabButton: { flex: 1, alignItems: 'center', paddingVertical: 12 },
-  tabLabel: { fontSize: 13, color: colors.inkFaint, fontWeight: '600' },
+  tabLabel: { fontSize: 12, color: colors.inkFaint, fontWeight: '600' },
   tabLabelActive: { color: colors.teal },
-  tabIndicator: { marginTop: 6, width: 24, height: 3, borderRadius: 2, backgroundColor: colors.teal },
+  tabIndicator: { marginTop: 6, width: 20, height: 3, borderRadius: 2, backgroundColor: colors.teal },
 });

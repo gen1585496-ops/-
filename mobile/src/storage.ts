@@ -25,3 +25,8 @@ export function getStreakEndingAt(dateStr: string, entries: Record<string, Diary
   }
   return streak;
 }
+
+export function getInclusiveStreak(dateStr: string, entries: Record<string, DiaryEntry>): number {
+  if (!entries[dateStr]) return 0;
+  return getStreakEndingAt(dateStr, entries) + 1;
+}
